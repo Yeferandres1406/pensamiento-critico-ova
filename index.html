@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EcoRuta - Pensamiento Crítico y Creativo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f7f4;--sf:#ffffff;--tx:#2c3e35;--mu:#5a6b60;--lupa:#2e7d32;--lupa-s:#e8f5e9;--chispa:#1565c0;--chispa-s:#e3f2fd;--sun:#fbc02d;--bd:#c8d7cd;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121a15;--sf:#1b2620;--tx:#e2eee7;--mu:#9cb3a5;--lupa:#81c784;--lupa-s:#1b3322;--chispa:#64b5f6;--chispa-s:#14293d;--bd:#354d3f;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121a15;--sf:#1b2620;--tx:#e2eee7;--mu:#9cb3a5;--lupa:#81c784;--lupa-s:#1b3322;--chispa:#64b5f6;--chispa-s:#14293d;--bd:#354d3f;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:18px/1.6 "Atkinson Hyperlegible",Verdana,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;line-height:1.15;margin:0 0 .5em}
+h1{font-size:clamp(2.2rem,7vw,4rem);font-weight:800}h2{font-size:clamp(1.6rem,4vw,2.2rem)}h3{font-size:1.2rem}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--sf);border-bottom:2px solid var(--bd);display:flex;gap:.25rem;overflow-x:auto;padding:.4rem .75rem}
+nav button{flex:none;border:0;background:none;color:var(--mu);font:700 1rem "Atkinson Hyperlegible",Verdana,sans-serif;padding:.6rem .9rem;border-radius:8px;cursor:pointer}
+nav button[aria-current="page"]{background:var(--lupa);color:#fff}
+button:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+main{max-width:920px;margin:0 auto;padding:1.5rem 1rem 4rem}
+section{display:none}section.on{display:block}
+p{max-width:68ch}
+.hero{display:grid;gap:1.5rem;grid-template-columns:1fr;align-items:center}
+@media(min-width:760px){.hero{grid-template-columns:1.3fr 1fr}}
+.lens{width:100%;max-width:300px;margin:auto}
+.lupa{color:var(--lupa)}.chispa{color:var(--chispa)}
+.btn{display:inline-block;border:0;border-radius:10px;padding:.75rem 1.2rem;font:700 1rem "Atkinson Hyperlegible",Verdana,sans-serif;cursor:pointer;background:var(--lupa);color:#fff}
+.btn.c{background:var(--chispa);color:#fff}
+.route{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));margin:1.5rem 0;padding:0;list-style:none}
+.route li{background:var(--sf);border:2px solid var(--bd);border-radius:12px;padding:1rem}
+.route li:nth-child(odd){border-color:var(--lupa)}.route li:nth-child(even){border-color:var(--chispa)}
+.grid{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+.card{min-height:150px;text-align:left;background:var(--lupa-s);color:var(--tx);border:2px solid var(--lupa);border-radius:12px;padding:1rem;font:inherit;cursor:pointer}
+.card strong{display:block;font:800 1.15rem "Bricolage Grotesque",sans-serif;color:var(--lupa)}
+.card.sc{background:var(--chispa-s);border-color:var(--chispa)}.card.sc strong{color:var(--chispa)}
+.card[aria-pressed="true"]{background:var(--lupa);color:#fff}.card[aria-pressed="true"] strong{color:#fff}
+.card.sc[aria-pressed="true"]{background:var(--chispa)}
+.hint{color:var(--mu);font-size:.95rem}
+.panel{background:var(--sf);border:2px solid var(--bd);border-radius:14px;padding:1.2rem;margin:1.2rem 0}
+.tags{display:flex;flex-wrap:wrap;gap:.5rem;padding:0;list-style:none}
+.tags li{background:var(--sf);border:2px solid var(--lupa);border-radius:99px;padding:.15rem .8rem}
+select,textarea{width:100%;font:inherit;color:var(--tx);background:var(--bg);border:2px solid var(--bd);border-radius:10px;padding:.7rem}
+textarea{min-height:130px}
+label{font-weight:700;display:block;margin:.8rem 0 .3rem}
+.opt{display:block;width:100%;text-align:left;margin:.4rem 0;background:var(--bg);color:var(--tx);border:2px solid var(--bd);border-radius:10px;padding:.7rem 1rem;font:inherit;cursor:pointer}
+.opt.ok{border-color:var(--lupa);background:var(--lupa-s)}.opt.no{border-color:var(--chispa);background:var(--chispa-s)}
+.fb{min-height:1.6em;font-weight:700}
+.big{font:800 2.2rem "Bricolage Grotesque",sans-serif;color:var(--chispa)}
+@media (prefers-reduced-motion:no-preference){.card{transition:background .2s}}
+</style>
+</head>
+<body>
+<nav aria-label="Navegación del recurso">
+<button data-v="inicio">Inicio</button><button data-v="recorrido">Nuestro recorrido</button><button data-v="critico">Pensar con lupa</button><button data-v="creatividad">Crear con chispa</button><button data-v="retos">Reto integrador</button><button data-v="evaluacion">Evaluación</button>
+</nav>
+<main>
+
+<section id="inicio">
+<div class="hero">
+<div>
+<h1><span class="lupa">EcoRuta:</span> <span class="chispa">Pensar y Crear</span></h1>
+<p>Recurso educativo digital interactivo (OVA) que integra el análisis de desinformación, el pensamiento crítico y la solución tecnológica para el manejo de residuos sólidos en la comunidad.</p>
+<p class="hint">Estudiante: Yeferson Andrés Salazar Restrepo · Ingeniería Informática</p>
+<button class="btn" data-go="recorrido">Ver nuestro recorrido</button>
+</div>
+<svg class="lens" viewBox="0 0 200 200" role="img" aria-label="Icono de EcoRuta">
+<circle cx="85" cy="85" r="60" fill="none" stroke="currentColor" stroke-width="12" class="lupa"/>
+<line x1="130" y1="130" x2="185" y2="185" stroke="currentColor" stroke-width="16" stroke-linecap="round" class="lupa"/>
+<path d="M85 45 L95 75 L125 85 L95 95 L85 125 L75 95 L45 85 L75 75Z" fill="var(--sun)" stroke="var(--chispa)" stroke-width="4"/>
+</svg>
+</div>
+<h2>Estructura de la Ruta</h2>
+<ol class="route">
+<li><h3>Nuestro recorrido</h3>Las tres actividades clave del curso y sus conexiones.</li>
+<li><h3>Pensar con lupa</h3>Elementos y estándares del pensamiento crítico (Paul y Elder).</li>
+<li><h3>Crear con chispa</h3>Estrategias de creatividad y técnicas de ideación.</li>
+<li><h3>Reto integrador</h3>Análisis de situaciones y generación de alternativas.</li>
+<li><h3>Evaluación</h3>Cuestionario interactivo con retroalimentación y reflexión.</li>
+</ol>
+</section>
+
+<section id="recorrido">
+<h2>Nuestro recorrido</h2>
+<p>Las evidencias desarrolladas a lo largo del curso, conectando la teoría con la práctica.</p>
+<div class="grid" id="evid"></div>
+<div class="panel"><h3>Mapa de relaciones conceptuales</h3>
+<ul>
+<li><strong>Supuestos, información y punto de vista</strong> → Actividad 1: análisis de la noticia falsa del Banco de la República[cite: 51].</li>
+<li><strong>Evidencia, precisión e imparcialidad</strong> → Actividad 2: cuestionario con preguntas literales, inferenciales y críticas[cite: 39].</li>
+<li><strong>Perspectivas múltiples</strong> → Actividad 3: árbol de problemas, encuesta y mapa de empatía del barrio[cite: 6].</li>
+<li><strong>Brainstorming y matriz de decisión</strong> → Actividad 3: selección y prototipado de la guía digital EcoRuta[cite: 6].</li>
+</ul></div>
+<div class="panel"><h3>Balance del aprendizaje</h3>
+<p><strong>Aprendizajes:</strong> Se consolidó la habilidad de cuestionar la información antes de difundirla y de estructurar soluciones tecnológicas orientadas a resolver necesidades socioambientales reales.</p>
+<p><strong>Aspectos de mejora:</strong> Ampliar el alcance de validación del prototipo con más actores de la comunidad y recicladores locales[cite: 6].</p></div>
+<button class="btn" data-go="critico">Repasar la lupa</button>
+</section>
+
+<section id="critico">
+<h2 class="lupa">Pensar con lupa</h2>
+<p>El pensamiento crítico evalúa la calidad de nuestro razonamiento mediante los elementos propuestos por Paul y Elder.</p>
+<div class="grid" id="elementos"></div>
+<div class="panel">
+<h3>Siete estándares intelectuales</h3>
+<ul class="tags"><li>Claridad</li><li>Exactitud</li><li>Precisión</li><li>Relevancia</li><li>Profundidad</li><li>Amplitud</li><li>Lógica</li></ul>
+<p>Filtros fundamentales para validar argumentos y evitar sesgos de confirmación.</p>
+</div>
+<p class="hint">Actitudes clave: tolerancia, mente abierta, rigor y curiosidad[cite: 4].</p>
+<button class="btn" data-go="creatividad">Ahora, la chispa</button>
+</section>
+
+<section id="creatividad">
+<h2 class="chispa">Crear con chispa</h2>
+<p>La creatividad se desarrolla mediante el esfuerzo y la aplicación de ejercicios metodológicos específicos para flexibilizar el pensamiento[cite: 5].</p>
+<div class="panel">
+<h3>Modelo de las 4C (Kaufman y Beghetto)</h3>
+<p>Toca cada tarjeta para explorar los niveles del desarrollo creativo.</p>
+<div class="grid" id="cuatroc"></div>
+</div>
+<div class="panel">
+<h3>Perspectiva de Sternberg</h3>
+<p>La creatividad es una decisión de asumir riesgos intelectuales y persistir ante la incertidumbre.</p>
+</div>
+<h3>Técnicas de creatividad aplicadas</h3>
+<div class="grid" id="tecnicas"></div>
+<p class="hint">Ejercicios prácticos integrados a partir de las estrategias de flexibilidad mental[cite: 5].</p>
+<button class="btn c" data-go="retos">Ir al reto integrador</button>
+</section>
+
+<section id="retos">
+<h2>Reto integrador</h2>
+<p>Aplique el análisis crítico y la generación creativa de alternativas.</p>
+<label for="sit">1. Seleccione una situación a analizar</label>
+<select id="sit">
+<option>Una noticia sospechosa llega a tu chat (Actividad 1)</option>
+<option>Mejorar EcoRuta, la guía de reciclaje (Actividad 3)</option>
+<option>Estudiar en casa sin distracciones</option>
+<option>Reducir el desperdicio de alimentos en el hogar</option>
+</select>
+<div class="panel" style="border-color:var(--lupa)">
+<h3 class="lupa">2. Análisis crítico (Con lupa)</h3>
+<ul id="lupaq"></ul>
+</div>
+<div class="panel" style="border-color:var(--chispa)">
+<h3 class="chispa">3. Generación de ideas (Con chispa)</h3>
+<p class="big" id="verbo">¡Listo!</p><p id="verbod" class="hint">Presione el botón para sortear un verbo SCAMPER.</p>
+<button class="btn c" id="sort">Sortear verbo</button>
+</div>
+<label for="ideas">4. Formulación de propuestas</label>
+<textarea id="ideas" placeholder="Escriba al menos 5 ideas derivadas de la sesión creativa..."></textarea>
+<p><strong id="cnt">0</strong> ideas registradas. <span id="msg" class="hint"></span></p>
+<button class="btn" data-go="evaluacion">Pasar a la evaluación</button>
+</section>
+
+<section id="evaluacion">
+<h2>Evaluación de conocimientos</h2>
+<div class="panel"><p class="hint" id="qn"></p><h3 id="qt"></h3><div id="qo"></div><p class="fb" id="qf" aria-live="polite"></p><button class="btn" id="qnext" hidden>Siguiente</button></div>
+<div class="panel" id="fin" hidden>
+<h3>Resultado obtenido: <span id="score"></span> de 5</h3>
+<label for="refl">Reflexión final del aprendizaje</label>
+<p class="hint">¿De qué manera aplicará estos conceptos en su vida profesional o cotidiana?</p>
+<textarea id="refl"></textarea>
+<button class="btn" id="redo">Reiniciar evaluación</button>
+</div>
+<div class="panel">
+<h3>Referencias bibliográficas</h3>
+<p class="hint">
+Paul, R. y Elder, L. La mini-guía para el pensamiento crítico: conceptos y herramientas.<br>
+Kaufman, J. C. (2009). Creativity 101. Springer Publishing Company.<br>
+Sternberg, R., Grigorenko, E. y Singer, J. (2004). Creativity: From Potential to Realization.<br>
+Tarapuez, E. y Lima, C. Creatividad empresarial.<br>
+Banco de la República. (2026). ¡Cuidado! Circula publicación falsa en redes sociales[cite: 51].<br>
+Departamento Nacional de Planeación et al. (2022). Guía nacional para la adecuada separación de residuos sólidos[cite: 38].
+</p>
+</div>
+</section>
+
+</main>
+<script>
+var $=function(s){return document.querySelector(s)};
+var views=["inicio","recorrido","critico","creatividad","retos","evaluacion"];
+function show(v){if(views.indexOf(v)<0)v="inicio";
+views.forEach(function(x){$("#"+x).classList.toggle("on",x===v)});
+document.querySelectorAll("nav button").forEach(function(b){if(b.dataset.v===v)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current")});
+window.scrollTo(0,0)}
+function go(v){location.hash=v}
+window.addEventListener("hashchange",function(){show(location.hash.slice(1))});
+document.querySelectorAll("nav button").forEach(function(b){b.onclick=function(){go(b.dataset.v)}});
+document.querySelectorAll("[data-go]").forEach(function(b){b.onclick=function(){go(b.dataset.go)}});
+show(location.hash.slice(1));
+
+function cards(id,list,cls){var box=$(id);list.forEach(function(it){var b=document.createElement("button");b.className="card "+cls;b.setAttribute("aria-pressed","false");
+b.innerHTML="<strong>"+it[0]+"</strong><span>"+(it[2]||"Toca para ver")+"</span>";
+b.onclick=function(){var p=b.getAttribute("aria-pressed")==="true";b.setAttribute("aria-pressed",!p);b.querySelector("span").textContent=p?(it[2]||"Toca para ver"):it[1]};box.appendChild(b)})}
+cards("#elementos",[
+["Propósito","¿Qué intento lograr con este razonamiento?"],
+["Pregunta","¿Cuál es el problema exacto que se busca resolver?"],
+["Información","¿Qué datos se poseen y de dónde provienen?"],
+["Inferencias","¿Qué conclusiones se obtienen y qué las sustenta?"],
+["Conceptos","¿Qué teorías o modelos se están empleando?"],
+["Supuestos","¿Qué se está dando por sentado sin verificar?"],
+["Implicaciones","¿Qué consecuencias se derivan de este razonamiento?"],
+["Punto de vista","¿Desde qué perspectiva se aborda la situación?"]],"");
+cards("#cuatroc",[
+["mini-c","Aprendizajes y descubrimientos personales."],
+["little-c","Soluciones creativas aplicadas a la vida cotidiana."],
+["Pro-c","Aportes de nivel profesional especializado."],
+["Big-C","Innovaciones históricas que transforman un campo."]],"sc");
+cards("#tecnicas",[
+["SCAMPER","Sustituir, combinar, adaptar, modificar, dar otros usos, eliminar y reordenar."],
+["¿Y si...?","Planteamiento de escenarios hipotéticos para romper inercias mentales."],
+["Relaciones forzadas","Asociación de conceptos disímiles para generar propuestas innovadoras."]],"sc");
+
+var sit={
+"Una noticia sospechosa llega a tu chat (Actividad 1)":["¿Cuál es la fuente original y cuenta con aval oficial?","¿Qué supuestos asumimos por la apariencia visual?","¿Se comparte por reacción emocional o por evidencia?[cite: 52]"],
+"Mejorar EcoRuta, la guía de reciclaje (Actividad 3)":["¿Qué tan representativos son los datos de la muestra inicial[cite: 12]?","¿El obstáculo principal es la información o la motivación[cite: 15]?","¿Cómo integrar las perspectivas de los recicladores[cite: 22]?"],
+"Estudiar en casa sin distracciones":["¿Qué factores ambientales o digitales afectan la concentración?","¿Qué hábitos previos limitan el rendimiento académico?","¿Qué implicaciones tendría mantener el mismo esquema dos semanas?"],
+"Reducir el desperdicio de alimentos en el hogar":["¿Qué volumen y tipo de residuos orgánicos se generan?","¿Qué conceptos definen el consumo responsable?","¿Cómo perciben los miembros del hogar esta problemática?"]};
+function lq(){var u=$("#lupaq");u.innerHTML="";sit[$("#sit").value].forEach(function(t){var l=document.createElement("li");l.textContent=t;u.appendChild(l)})}
+$("#sit").onchange=lq;lq();
+var vb=[["Sustituir","¿Qué componente se puede reemplazar?"],["Combinar","¿Qué funciones se pueden integrar?"],["Adaptar","¿Qué metodologías externas se pueden incorporar?"],["Modificar","¿Qué escala o estructura se puede ajustar?"],["Otros usos","¿Qué utilidad alternativa se le puede dar?"],["Eliminar","¿Qué elementos superfluos se pueden quitar?"],["Reordenar","¿Cómo alterar la secuencia de procesos?"]];
+$("#sort").onclick=function(){var v=vb[Math.floor(Math.random()*vb.length)];$("#verbo").textContent=v[0];$("#verbod").textContent=v[1]};
+$("#ideas").oninput=function(){var n=this.value.split("\n").filter(function(x){return x.trim()}).length;$("#cnt").textContent=n;$("#msg").textContent=n>=5?"¡Excelente! Fluidez de ideas alcanzada.":""};
+
+var Q=[
+["¿Qué entidad alertó sobre la publicación falsa analizada en la Actividad 1?",["Noticias RCN","El Banco de la República","Una red social"],1,"El Banco de la República emitió la advertencia oficial sobre la imagen manipulada[cite: 51].","literal"],
+["¿Por qué una imagen profesional puede generar credibilidad en una noticia falsa?",["Porque la apariencia genera confianza aunque falten pruebas[cite: 42]","Porque toda publicación formal es oficial","Porque las imágenes identifican la fuente"],0,"La apariencia visual no sustituye a la verificación de evidencias.","inferencial"],
+["Compartir una noticia masivamente solo por inercia grupal refleja...",["Una verificación rigurosa en fuentes oficiales","La influencia del grupo que afecta el juicio[cite: 42]","Una demostración de veracidad"],1,"La presión grupal es un sesgo común que bloquea el criterio.","inferencial"],
+["Ante una supuesta entrevista sin respaldo en canales oficiales, lo más razonable es...",["Compartirla para viralizarla","Verificar la fuente original y buscar evidencias[cite: 44]","Aceptarla por la fama del personaje"],1,"Se deben aplicar los criterios de evidencia y precisión.","crítico"],
+["¿Cómo debe interpretarse una encuesta de 7 participantes en un diagnóstico local?",["Como una verdad absoluta e indiscutible","Como una pista inicial que orienta y debe contrastarse[cite: 12]","Como un dato irrelevante"],1,"Permite identificar tendencias pero requiere validación complementaria.","crítico"]];
+var qi=0,sc=0;
+function ask(){$("#fin").hidden=true;var q=Q[qi];$("#qn").textContent="Pregunta "+(qi+1)+" de 5 · Nivel "+q[4];$("#qt").textContent=q[0];$("#qf").textContent="";$("#qnext").hidden=true;var o=$("#qo");o.innerHTML="";
+q[1].forEach(function(t,i){var b=document.createElement("button");b.className="opt";b.textContent=t;b.onclick=function(){
+if(o.dataset.done)return;o.dataset.done=1;var ok=i===q[2];if(ok)sc++;b.classList.add(ok?"ok":"no");
+if(!ok)o.children[q[2]].classList.add("ok");
+$("#qf").textContent=(ok?"¡Correcto! ":"Incorrecto. ")+q[3];$("#qnext").hidden=false;$("#qnext").textContent=qi<4?"Siguiente":"Ver resultado"};o.appendChild(b)});delete o.dataset.done}
+$("#qnext").onclick=function(){if(qi<4){qi++;ask()}else{$("#score").textContent=sc;$("#fin").hidden=false;$("#qnext").hidden=true}};
+$("#redo").onclick=function(){qi=0;sc=0;ask()};
+cards("#evid",[
+["Actividad 1 · Desinformación","Análisis de la publicación falsa relacionada con el Banco de la República. Identificación de hechos, opiniones, supuestos y bloqueadores del pensamiento crítico[cite: 51].","Caso práctico. Toca para ver."],
+["Actividad 2 · Cuestionario","Diseño de 10 preguntas evaluativas estructuradas en niveles literal, inferencial y crítico con su respectiva retroalimentación[cite: 39].","Evaluación analítica. Toca para ver."]],"");
+cards("#evid",[
+["Actividad 3 · EcoRuta","Diagnóstico ambiental, árbol de problemas, mapa de empatía y selección mediante matriz de decisión de la guía interactiva EcoRuta[cite: 6].","Solución prototipada. Toca para ver."]],"sc");
+ask();
+</script>
+</body>
+</html>
